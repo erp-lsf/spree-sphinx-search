@@ -3,7 +3,7 @@ Product.class_eval do
   self.indexed_options = []
 
   define_index do
-    is_active_sql = "(products.deleted_at IS NULL AND products.available_on <= NOW() #{'AND (products.count_on_hand > 0)' unless Spree::Config[:allow_backorders]} )"
+    is_active_sql = "(products.deleted_at IS NULL AND products.available_on <= NOW() #{'AND (products.count_on_hand > 0)' if check_count_in_search} )"
     option_sql = lambda do |option_name|
       sql = <<-eos
         SELECT DISTINCT p.id, ov.id
@@ -33,5 +33,9 @@ Product.class_eval do
     end
 
     #set_property :delta => (Spree::Config[:use_sphinx_delta_index] == "0" ? false : true)  
+  end
+
+  def check_count_in_search
+    !Spree::Config[:allow_backorders]
   end
 end
