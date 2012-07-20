@@ -24,6 +24,9 @@ Product.class_eval do
     indexes :meta_description
     indexes :meta_keywords
     indexes taxons.name, :as => :taxon, :facet => true
+    if Taxon.column_names.include?("alt_name")
+      indexes taxons.alt_name
+    end
     has taxons(:id), :as => :taxon_ids
     #group_by :deleted_at
     group_by :available_on
