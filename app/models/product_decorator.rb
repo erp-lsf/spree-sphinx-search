@@ -18,14 +18,14 @@ Product.class_eval do
       sql.gsub("\n", ' ').gsub('  ', '')
     end
     indexes :id
-    indexes variants.sku, :as => :variant_sku
-    indexes :name
-    indexes :description
-    indexes :meta_description
-    indexes :meta_keywords
-    indexes taxons.name, :as => :taxon, :facet => true
+    indexes variants.sku, :as => :variant_sku, :infixes => true
+    indexes :name, :infixes => true
+    indexes :description, :infixes => true
+    indexes :meta_description, :infixes => true
+    indexes :meta_keywords, :infixes => true
+    indexes taxons.name, :as => :taxon, :facet => true, :infixes => true
     if Taxon.column_names.include?("alt_name")
-      indexes taxons.alt_name
+      indexes taxons.alt_name, :infixes => true
     end
     has taxons(:id), :as => :taxon_ids
     #group_by :deleted_at
