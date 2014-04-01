@@ -1,3 +1,5 @@
+module Spree::SphinxSearch; end;
+
 module SpreeSphinxSearch
   class Engine < Rails::Engine
     require 'spree/core'
@@ -6,13 +8,12 @@ module SpreeSphinxSearch
 
     config.autoload_paths += %W(#{config.root}/lib)
 
-    def self.activate
-      # if Spree::Config.instance
-      #   Spree::Config.searcher_class = Spree::Search::ThinkingSphinx
-      #   Spree::Config.set(:product_price_ranges => 
-      #                 ["Under $25", "$25 to $50", "$50 to $100", "$100 to $200", "$200 and above"])
-      # end
+    initializer "spree.sphinx_search.preferences", :before => :load_config_initializers do |app|
+      Spree::Config.searcher_class = Spree::Search::ThinkingSphinx
+      Spree::SphinxSearch::Config = Spree::SphinxSearchConfiguration.new
+    end
 
+    def self.activate
       Dir.glob(File.join(File.dirname(__FILE__), "../../app/**/*_decorator*.rb")) do |c|
         Rails.configuration.cache_classes ? require(c) : load(c)
       end

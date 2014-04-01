@@ -1,5 +1,5 @@
 module Spree::Search
-  class ThinkingSphinx < Spree::Search::Base
+  class ThinkingSphinx < Spree::Core::Search::Base
     protected
     # method should return AR::Relations with conditions {:conditions=> "..."} for Product model
     def get_products_conditions_for(base_scope,query)
