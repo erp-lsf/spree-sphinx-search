@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.add_dependency(%q<spree_core>, [">= 2.2.0"])
-    s.add_dependency(%q<thinking-sphinx>, ["= 2.0.10"])
+    s.add_dependency(%q<thinking-sphinx>, ["= 3.1.0"])
     s.add_dependency(%q<thinking-sphinx-raspell>,[">= 1.1.0"])
   end
 end
