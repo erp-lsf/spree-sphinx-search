@@ -17,7 +17,7 @@ module Spree::Search
         with_opts.merge!(:taxon_ids => taxon_ids)
       end
       search_options.merge!(:with => with_opts)
-      facets = Product.facets(query, search_options)
+      facets = Spree::Product.facets(query, search_options)
       products = facets.for
 
       @properties[:products] = products
@@ -36,17 +36,17 @@ module Spree::Search
       @properties[:page] = (params[:page].to_i <= 0) ? 1 : params[:page].to_i
       @properties[:manage_pagination] = true
       @properties[:order_by_price] = params[:order_by_price]
-      if !params[:order_by_price].blank?
-        @product_group = ProductGroup.new.from_route([params[:order_by_price]+"_by_master_price"])
-      elsif params[:product_group_name]
-        @cached_product_group = ProductGroup.find_by_permalink(params[:product_group_name])
-        @product_group = ProductGroup.new
-      elsif params[:product_group_query]
-        @product_group = ProductGroup.new.from_route(params[:product_group_query].split("/"))
-      else
-        @product_group = ProductGroup.new
-      end
-      @product_group = @product_group.from_search(params[:search]) if params[:search]
+      # if !params[:order_by_price].blank?
+      #   @product_group = ProductGroup.new.from_route([params[:order_by_price]+"_by_master_price"])
+      # elsif params[:product_group_name]
+      #   @cached_product_group = ProductGroup.find_by_permalink(params[:product_group_name])
+      #   @product_group = ProductGroup.new
+      # elsif params[:product_group_query]
+      #   @product_group = ProductGroup.new.from_route(params[:product_group_query].split("/"))
+      # else
+      #   @product_group = ProductGroup.new
+      # end
+      # @product_group = @product_group.from_search(params[:search]) if params[:search]
     end
 
 private
