@@ -1,6 +1,6 @@
 module Spree
   Product.class_eval do
-    class_inheritable_array :indexed_options
+    class_attribute :indexed_options
     self.indexed_options = []
 
     define_index do
