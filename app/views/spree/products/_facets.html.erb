@@ -1,6 +1,6 @@
 <%
 facets = @searcher.facets || []
-price_ranges = YAML::load(Spree::Config[:product_price_ranges])
+price_ranges = Spree::SphinxSearch::Config[:product_price_ranges]
   for facet in facets
     options = facet.options
     options = options.sort{|x,y| y.count <=> x.count} unless facet.name == :price_range

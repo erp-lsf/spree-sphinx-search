@@ -54,7 +54,7 @@ private
     # method should return new scope based on base_scope
     def parse_facets_hash(facets_hash = {})
       facets = []
-      price_ranges = YAML::load(Spree::Config[:product_price_ranges])
+      price_ranges = Spree::SphinxSearch::Config[:product_price_ranges]
       facets_hash.each do |name, options|
         next if options.size <= 1
         facet = Facet.new(name)
