@@ -20,7 +20,7 @@ module Spree::Search
       end
 
       def prepare(params)
-        @properties[:taxon] = params[:taxon].blank? ? nil : params[:taxon]
+        @properties[:taxon] = params[:taxon].blank? ? nil : Spree::Taxon.find(params[:taxon])
         @properties[:keywords] = params[:keywords]
         @properties[:search] = params[:search]
 

@@ -9,8 +9,8 @@ module Spree
     	{ with: { is_active: true } }
     end
 
-    sphinx_scope(:ts_in_taxon) do |taxon_ids|
-    	{ with: { taxon_ids: taxon_ids } }
+    sphinx_scope(:ts_in_taxon) do |taxon|
+    	{ with: { taxon_ids: taxon.self_and_descendants.pluck(:id) } }
     end
 
 
