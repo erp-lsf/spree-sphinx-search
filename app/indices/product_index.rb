@@ -5,11 +5,15 @@ ThinkingSphinx::Index.define 'spree/product', :with => :active_record do
   indexes :description
   indexes :meta_description
   indexes :meta_keywords
-  has is_active_sql, :as => :is_active, :type => :boolean
   indexes taxons.name, :as => :taxon, :facet => true
 
+  has is_active_sql, :as => :is_active, :type => :boolean
+  has master.default_price.amount, as: :product_price, type: :float
+
+  if Spree::Price.column_names.include? "old_amount"
+  	has master.default_price.old_amount, as: :product_old_price, type: :float
+  end
+
   has taxons(:id), :as => :taxon_ids
-  group_by :deleted_at
-  group_by :available_on
   
 end

@@ -13,6 +13,5 @@ module Spree
     	{ with: { taxon_ids: taxon.self_and_descendants.pluck(:id) } }
     end
 
-
   end
 end
