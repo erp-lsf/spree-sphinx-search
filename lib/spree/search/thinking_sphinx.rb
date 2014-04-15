@@ -22,7 +22,6 @@ module Spree::Search
         base_scope
       end
 
-
       def add_search_scopes(base_scope)
         search.each do |name, scope_attribute|
           scope_name = name.to_sym
@@ -30,7 +29,7 @@ module Spree::Search
         end if search
         base_scope
       end
-     
+
       # method should return new scope based on base_scope
       def get_products_conditions_for(ts_base_scope, query)
         unless query.blank?
@@ -50,4 +49,4 @@ module Spree::Search
       end
   end
 end
-  
+
