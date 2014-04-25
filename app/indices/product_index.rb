@@ -1,4 +1,4 @@
-ThinkingSphinx::Index.define 'spree/product', :with => :active_record do
+ThinkingSphinx::Index.define 'spree/product', :with => :active_record, :delta => ThinkingSphinx::Deltas::DefaultDelta do
   is_active_sql = "(spree_products.deleted_at IS NULL AND spree_products.available_on <= NOW())"
 
   indexes :name
@@ -15,5 +15,5 @@ ThinkingSphinx::Index.define 'spree/product', :with => :active_record do
   end
 
   has taxons(:id), :as => :taxon_ids
-  
+  set_property :delta => ThinkingSphinx::Deltas::DefaultDelta
 end

@@ -9,21 +9,21 @@ Gem::Specification.new do |s|
   s.authors = ["Roman Smirnov"]
   s.description = "Search for Spree via Sphinx."
   s.summary = "Search for Spree via Sphinx."
-  s.required_ruby_version = '>= 1.8.7'  
+  s.required_ruby_version = '>= 1.8.7'
 
-  
+
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.homepage = %q{http://github.com/romul/spree-sphinx-search}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
-  
+
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
-    s.add_dependency(%q<spree_core>, [">= 2.2.0"])
-    s.add_dependency(%q<thinking-sphinx>, ["= 3.1.0"])
-    s.add_dependency(%q<thinking-sphinx-raspell>,[">= 1.1.0"])
+    s.add_dependency("spree_core", [">= 2.2.0"])
+    s.add_dependency("thinking-sphinx", ["= 3.1.0"])
+    s.add_dependency("thinking-sphinx-raspell",[">= 1.1.0"])
   end
 end
 
