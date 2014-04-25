@@ -15,14 +15,13 @@ Sphinx Search
 1. Copy config/sphinx.yml to RAILS_ROOT/config/sphinx.yml
 1. Add migration to your application like this:
 
-    ``
-      class AddDeltaToProducts < ActiveRecord::Migration
-        def change
-          add_column :spree_products, :delta, :boolean, default: true, null: false
-          add_index :spree_products, :delta
+        class AddDeltaToProducts < ActiveRecord::Migration
+          def change
+            add_column :spree_products, :delta, :boolean, default: true, null: false
+            add_index :spree_products, :delta
+          end
         end
-      end
-    ``
+
 
 
 **NOTE:** This extension works only with Spree 0.30 and higher.
