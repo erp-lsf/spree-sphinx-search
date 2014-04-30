@@ -33,9 +33,9 @@ module Spree::Search
       # method should return new scope based on base_scope
       def get_products_conditions_for(ts_base_scope, query)
         unless query.blank?
-          ts_base_scope = ts_base_scope.search_for_ids(query)
+          ts_base_scope = ts_base_scope.search_for_ids(query, per_page: 10000)
         end
-        Spree::Product.where("spree_products.id IN (?)", ts_base_scope.search_for_ids)
+        Spree::Product.where("spree_products.id IN (?)", ts_base_scope.search_for_ids(per_page: 10000))
       end
 
       def prepare(params)
