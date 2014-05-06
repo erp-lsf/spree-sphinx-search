@@ -3,13 +3,7 @@ module Spree::Search
 
     def retrieve_products
       @products_scope = get_base_scope
-      curr_page = page || 1
-
-      @products = @products_scope.includes([:master => :prices])
-      unless Spree::Config.show_products_without_price
-        @products = @products.where("spree_prices.amount IS NOT NULL").where("spree_prices.currency" => current_currency)
-      end
-      @products = @products.page(curr_page).per(per_page)
+      @products = @products_scope.search(page: page, per_page: per_page, sql: { includes: [:master => :prices] })
     end
 
     protected
@@ -33,9 +27,9 @@ module Spree::Search
       # method should return new scope based on base_scope
       def get_products_conditions_for(ts_base_scope, query)
         unless query.blank?
-          ts_base_scope = ts_base_scope.search_for_ids(query, per_page: 10000)
+          ts_base_scope = ts_base_scope.search(query)
         end
-        Spree::Product.where("spree_products.id IN (?)", ts_base_scope.search_for_ids(per_page: 10000))
+        ts_base_scope.search
       end
 
       def prepare(params)
