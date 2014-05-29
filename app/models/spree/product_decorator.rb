@@ -6,7 +6,7 @@ module Spree
     self.indexed_options = []
 
     sphinx_scope(:ts_is_active) do
-      { with: { is_active: true } }
+      { conditions: { :deleted_at => nil } }
     end
 
     sphinx_scope(:ts_in_taxon) do |taxon|
@@ -14,7 +14,7 @@ module Spree
     end
 
     def is_active
-      deleted_at == nil && available_on < Time.now
+      deleted_at == nil
     end
 
   end

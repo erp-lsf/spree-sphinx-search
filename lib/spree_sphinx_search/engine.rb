@@ -21,7 +21,7 @@ module SpreeSphinxSearch
     
     config.to_prepare &method(:activate).to_proc
     
-    def load_tasks
-    end
+#    def load_tasks
+#    end
   end
 end
