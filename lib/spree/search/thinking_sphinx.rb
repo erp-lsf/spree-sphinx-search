@@ -10,7 +10,13 @@ module Spree::Search
 
       def get_base_scope
         ts_base_scope = Spree::Product.ts_is_active
-        ts_base_scope = ts_base_scope.ts_in_taxon(taxon) unless taxon.blank?
+        if taxon
+          ts_base_scope = ts_base_scope.ts_in_taxon(taxon)
+        elsif search
+          p search
+          taxon = Spree::Taxon.find_by_id(search.first[1].first[1].first[0])
+          ts_base_scope = ts_base_scope.ts_in_taxon(taxon)
+        end
         ts_base_scope = add_search_scopes(ts_base_scope)
         base_scope = get_products_conditions_for(ts_base_scope, keywords)
         base_scope
