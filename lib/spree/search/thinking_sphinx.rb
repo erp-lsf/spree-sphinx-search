@@ -13,7 +13,6 @@ module Spree::Search
         if taxon
           ts_base_scope = ts_base_scope.ts_in_taxon(taxon)
         elsif search
-          p search
           taxon = Spree::Taxon.find_by_id(search.first[1].first[1].first[0])
           ts_base_scope = ts_base_scope.ts_in_taxon(taxon)
         end
